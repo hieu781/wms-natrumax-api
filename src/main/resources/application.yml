@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: wms-natrumax
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wms-natrumax
+    username: root
+    password: 12345
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+wms-natrumax:
+  app:
+    smsAccessToken: I1_PFMV9DS-L4E6_C8eCU0lnZ8uB2t0M
+    senderId: 92d400f51a9621a0
+    cloudName: dmpnahuvf
+    apiKey: 635865454543516
+    apiSecret: PRGDhhnZLaENnLTHrer763sHzYY
+    jwtSecret: db4193a9fce72630fb176fc5585d89821fc476b354c4d971e18d3448fe06f5ec0c6a20311a894c942dc6b2fadbb0811b32f7b9f847a83245571f02b54178aaeb
+    jwtExpirationMs: 604800000
