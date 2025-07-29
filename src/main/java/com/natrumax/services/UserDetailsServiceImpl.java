@@ -17,14 +17,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     @Transactional
+<<<<<<< HEAD
     public UserDetails loadUserByUsername(String accountName) throws UsernameNotFoundException {
 
         User user = userRepository.findByAccountName(accountName)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with accountName: " + accountName));
+=======
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByPhoneNumber(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 
         return UserDetailsImpl.build(user);
     }
 
+<<<<<<< HEAD
 
     @Transactional
     public UserDetails loadUserByPhoneNumber(String phoneNumber) throws UsernameNotFoundException {
@@ -33,4 +40,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return UserDetailsImpl.build(user);
     }
+=======
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 }

@@ -64,6 +64,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth
                                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/webjars/**", "/login").permitAll()
+<<<<<<< HEAD
                                 .requestMatchers("/api/v1/auth/**").permitAll()
                                 .requestMatchers("/api/test/**").permitAll()
                                 .requestMatchers("/api/v1/users/**").permitAll()
@@ -90,6 +91,10 @@ public class WebSecurityConfig {
                                 .requestMatchers("/api/v1/banks/**").permitAll()
                                 .requestMatchers("/api/v1/misa-products/**").permitAll()
                                 .requestMatchers("/api/v1/reports/**").permitAll()
+=======
+                                .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/api/test/**").permitAll()
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
                                 .anyRequest().authenticated()
                 );
 
@@ -99,5 +104,8 @@ public class WebSecurityConfig {
 
         return http.build();
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 }

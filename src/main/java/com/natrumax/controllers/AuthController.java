@@ -1,5 +1,6 @@
 package com.natrumax.controllers;
 
+<<<<<<< HEAD
 import com.natrumax.dto.request.LoginRequest;
 import com.natrumax.dto.request.OtpRequest;
 import com.natrumax.dto.request.OtpVerificationRequest;
@@ -232,4 +233,7 @@ public class AuthController {
 //            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid JWT token.");
 //        }
 //    }
+=======
+public class AuthController {
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 }

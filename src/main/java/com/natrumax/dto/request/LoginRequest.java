@@ -1,6 +1,7 @@
 package com.natrumax.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+<<<<<<< HEAD
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -28,5 +29,18 @@ public class LoginRequest {
 
     public void setPassword(String password) {
         this.password = password;
+=======
+
+public class LoginRequest {
+    @NotBlank(message = "Username is required and cannot be blank.")
+    private String phonenumber;
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
     }
 }

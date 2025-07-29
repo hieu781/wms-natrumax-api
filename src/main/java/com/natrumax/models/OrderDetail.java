@@ -1,26 +1,36 @@
 package com.natrumax.models;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+=======
+import jakarta.persistence.*;
+
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 @Entity
 @Table(name = "Order_details")
 public class OrderDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
     @Column(name = "order_details_id")
     private int orderDetailId;
 
     @Column(name = "is_bonus", nullable = false)
     private boolean isBonus;
+=======
+    private int id;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
+<<<<<<< HEAD
     @Column(name = "price", nullable = false)
     private double price;
     @Transient
@@ -40,6 +50,14 @@ public class OrderDetail {
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
+=======
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
+
+    @OneToOne
+    @JoinColumn(name = "product_id", unique = true, nullable = false)
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
     private Product product;
     // Getters and Setters
 
@@ -47,6 +65,7 @@ public class OrderDetail {
     public OrderDetail() {
     }
 
+<<<<<<< HEAD
 
     public OrderDetail(int orderDetailId, boolean isBonus, int quantity, LocalDateTime createDate, LocalDateTime modifyDate, Order order, Product product) {
         this.orderDetailId = orderDetailId;
@@ -54,10 +73,16 @@ public class OrderDetail {
         this.quantity = quantity;
         this.createDate = createDate;
         this.modifyDate = modifyDate;
+=======
+    public OrderDetail(int id, int quantity, Order order, Product product) {
+        this.id = id;
+        this.quantity = quantity;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
         this.order = order;
         this.product = product;
     }
 
+<<<<<<< HEAD
     public int getOrderDetailId() {
         return orderDetailId;
     }
@@ -72,6 +97,14 @@ public class OrderDetail {
 
     public void setBonus(boolean bonus) {
         isBonus = bonus;
+=======
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
     }
 
     public int getQuantity() {
@@ -82,6 +115,7 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
+<<<<<<< HEAD
     public LocalDateTime getCreateDate() {
         return createDate;
     }
@@ -98,6 +132,8 @@ public class OrderDetail {
         this.modifyDate = modifyDate;
     }
 
+=======
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
     public Order getOrder() {
         return order;
     }
@@ -113,6 +149,7 @@ public class OrderDetail {
     public void setProduct(Product product) {
         this.product = product;
     }
+<<<<<<< HEAD
 
     public double getPrice() {
         return price;
@@ -128,5 +165,7 @@ public class OrderDetail {
     public void setBonusQuantity(int bonusQuantity) {
         this.bonusQuantity = bonusQuantity;
     }
+=======
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 }
 

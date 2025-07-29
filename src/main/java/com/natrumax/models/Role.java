@@ -1,10 +1,14 @@
 package com.natrumax.models;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.natrumax.models.Enum.ERole;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+=======
+import jakarta.persistence.*;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +22,7 @@ public class Role {
 
     @Column(name = "create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+<<<<<<< HEAD
     private LocalDateTime createDate;
 
     @Column(name = "modify_date")
@@ -33,6 +38,18 @@ public class Role {
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
+=======
+    private Date createDate;
+
+    @Column(name = "last_modify_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifyDate;
+
+    @Column(name = "name", length = 255)
+    private String name;
+
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
     private List<User> users;
 
     // Getters and Setters
@@ -41,6 +58,15 @@ public class Role {
     public Role() {
     }
 
+<<<<<<< HEAD
+=======
+    public Role(int id, Date createDate, Date lastModifyDate, String name) {
+        this.id = id;
+        this.createDate = createDate;
+        this.lastModifyDate = lastModifyDate;
+        this.name = name;
+    }
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 
     public int getId() {
         return id;
@@ -50,6 +76,7 @@ public class Role {
         this.id = id;
     }
 
+<<<<<<< HEAD
     public LocalDateTime getCreateDate() {
         return createDate;
     }
@@ -85,4 +112,29 @@ public class Role {
     public void setDescription(String description) {
         this.description = description;
     }
+=======
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getLastModifyDate() {
+        return lastModifyDate;
+    }
+
+    public void setLastModifyDate(Date lastModifyDate) {
+        this.lastModifyDate = lastModifyDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 }

@@ -1,5 +1,6 @@
 package com.natrumax.services;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,6 +36,27 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+=======
+import com.natrumax.dto.request.LoginRequest;
+import com.natrumax.models.Role;
+import com.natrumax.models.User;
+import com.natrumax.repository.RoleRepository;
+import com.natrumax.repository.UserRepository;
+import com.natrumax.services.interfaces.IUserService;
+import com.natrumax.utils.SpeedSMSAPI;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 
 @Service
 public class UserService implements IUserService {
@@ -43,8 +65,11 @@ public class UserService implements IUserService {
         return null;
     }
 
+<<<<<<< HEAD
     @Autowired
     private PasswordEncoder passwordEncoder;
+=======
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
     @Override
     public Boolean existsById(Long id) {
         return null;
@@ -67,6 +92,7 @@ public class UserService implements IUserService {
     @Autowired
     private RoleRepository roleRepository;
 
+<<<<<<< HEAD
     @Autowired
     private OtpRepository otpRepository;
 
@@ -97,21 +123,32 @@ public class UserService implements IUserService {
     @Autowired
     private UserProductRepository userProductRepository;
 
+=======
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
     @Override
     public Boolean existsByPhoneNumber(String phoneNumber) {
         return userRepository.existsByPhoneNumber(phoneNumber);
     }
 
     @Override
+<<<<<<< HEAD
     public Boolean loginUser(LoginRequest loginRequest) {
         Optional<User> optionalUser = userRepository.findByPhoneNumber(loginRequest.getPhoneNumber());
 
         if (optionalUser.isEmpty()) {
             return false; // Người dùng không tồn tại
+=======
+    public Boolean loginUser(LoginRequest loginRequestp) {
+        Optional<User> optionalUser = userRepository.findByPhoneNumber(loginRequestp.getPhonenumber());
+
+        if (optionalUser.isEmpty()) {
+            return false; // User does not exist
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
         }
 
         User user = optionalUser.get();
 
+<<<<<<< HEAD
         Optional<Otp> otpOptional = otpRepository.findByUser(user);
         Otp otp;
 
@@ -155,6 +192,22 @@ public class UserService implements IUserService {
             String result = api.sendSMS(
                     loginRequest.getPhoneNumber(),
                     "Chào bạn, mã xác thực đăng nhập Natrumax của bạn là " + randomOtp,
+=======
+        // Generate OTP
+        Random r = new Random();
+        String randomNumber = String.format("%04d", r.nextInt(10000));
+        user.setOtpVerification(Integer.parseInt(randomNumber));
+        user.setOtpExpirationTime(LocalDateTime.now().plusMinutes(30)); // OTP valid for 30 minutes
+
+        userRepository.save(user); // Save the updated OTP and expiration time
+
+        // Send SMS to user phone number
+        SpeedSMSAPI api = new SpeedSMSAPI(smsAccessToken);
+        try {
+            String result = api.sendSMS(
+                    loginRequestp.getPhonenumber(),
+                    "Chào bạn, mã xác thực của bạn là " + randomNumber,
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
                     5, senderId
             );
             System.out.println(result);
@@ -166,6 +219,7 @@ public class UserService implements IUserService {
         return true;
     }
 
+<<<<<<< HEAD
 
     @Override
     public Boolean verifyUser(String phoneNumber, Integer otpCode) {
@@ -267,6 +321,52 @@ public class UserService implements IUserService {
 
     public Optional<User> getUserById(Long id){
         return userRepository.findById(id);
+=======
+    @Override
+    public Boolean verifyUser(String phoneNumber, Integer otp) {
+        Optional<User> u = userRepository.findByPhoneNumber(phoneNumber);
+        if (u.isPresent()) {
+            User user = u.get();
+            if (otp == user.getOtpVerification()) {
+                if (user.getOtpExpirationTime().isAfter(LocalDateTime.now())) {
+                    user.setOtpVerification(0);
+                    userRepository.save(user);
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean resendOtp(String phoneNumber) {
+        User user = userRepository.findByPhoneNumber(phoneNumber).orElse(null);
+        if (user != null) {
+            Random r = new Random();
+            String randomNumber = String.format("%04d", r.nextInt(10000));
+            user.setOtpVerification(Integer.parseInt(randomNumber));
+            user.setOtpExpirationTime(LocalDateTime.now().plusMinutes(30)); // 30 phút verification
+
+            userRepository.save(user);
+
+            // Gửi SMS cho user phone number
+            SpeedSMSAPI api = new SpeedSMSAPI(smsAccessToken);
+            try {
+                String result = api.sendSMS(phoneNumber, "Chào bạn, mã xác thực của bạn là " + randomNumber, 5, senderId);
+                System.out.println(result);
+                if (result.contains("error")) {
+                    return false;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+        return false;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
     }
 
     @Override
@@ -278,6 +378,7 @@ public class UserService implements IUserService {
     public User findUserById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
+<<<<<<< HEAD
 
     public List<UserResponse> getAllUser() {
         return userRepository.findAll().stream()
@@ -608,4 +709,6 @@ public class UserService implements IUserService {
     public List<User> getUsersByRole(ERole role) {
         return userRepository.findByRole_Name(role);
     }
+=======
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 }

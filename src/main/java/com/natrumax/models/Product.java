@@ -1,9 +1,14 @@
 package com.natrumax.models;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+=======
+import jakarta.persistence.*;
+import java.util.Date;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 import java.util.List;
 
 @Entity
@@ -12,14 +17,19 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
     @Column(name = "product_id")
     private Long productId;
+=======
+    private int id;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 
     @Column(name = "barcode", nullable = false, length = 255)
     private String barcode;
 
     @Column(name = "create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+<<<<<<< HEAD
     private LocalDateTime createDate;
 
     @Column(name = "modify_date")
@@ -32,10 +42,24 @@ public class Product {
     @Column(name = "discount", nullable = false)
     private double discount;
 
+=======
+    private Date createDate;
+
+    @Column(name = "description", nullable = false, length = 255)
+    private String description;
+
+    @Column(name = "discount", nullable = false)
+    private float discount;
+
+    @Column(name = "last_modify_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifyDate;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 
     @Column(name = "name", length = 255)
     private String name;
 
+<<<<<<< HEAD
     @Column(name = "base_price", nullable = false)
     private double basePrice;
 
@@ -47,10 +71,15 @@ public class Product {
 
     @Column(name = "misa_code", nullable = false, length = 255)
     private String misaCode;
+=======
+    @Column(name = "quantity", nullable = false)
+    private int quantity;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 
     @Column(name = "quantity_to_get_promotion")
     private Integer quantityToGetPromotion;
 
+<<<<<<< HEAD
 
     @Column(name = "status", nullable = false)
     private boolean status;
@@ -77,18 +106,54 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<UserProduct> userProducts;
+=======
+    @Column(name = "status", nullable = false)
+    private boolean status;
+
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private OrderDetail orderDetail;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CommissionProduct> commissionProducts;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RedemptionCode> redemptionCodes;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
     // Getters and Setters
 
 
     public Product() {
     }
 
+<<<<<<< HEAD
     public Long getProductId() {
         return productId;
     }
 
     public void setProductId(Long productId) {
         this.productId = productId;
+=======
+    public Product(int id, String barcode, Date createDate, String description, float discount, Date lastModifyDate, String name, int quantity, Integer quantityToGetPromotion, boolean status, OrderDetail orderDetail) {
+        this.id = id;
+        this.barcode = barcode;
+        this.createDate = createDate;
+        this.description = description;
+        this.discount = discount;
+        this.lastModifyDate = lastModifyDate;
+        this.name = name;
+        this.quantity = quantity;
+        this.quantityToGetPromotion = quantityToGetPromotion;
+        this.status = status;
+        this.orderDetail = orderDetail;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
     }
 
     public String getBarcode() {
@@ -99,11 +164,19 @@ public class Product {
         this.barcode = barcode;
     }
 
+<<<<<<< HEAD
     public LocalDateTime getCreateDate() {
         return createDate;
     }
 
     public void setCreateDate(LocalDateTime createDate) {
+=======
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
         this.createDate = createDate;
     }
 
@@ -115,6 +188,7 @@ public class Product {
         this.description = description;
     }
 
+<<<<<<< HEAD
     public double getDiscount() {
         return discount;
     }
@@ -129,6 +203,22 @@ public class Product {
 
     public void setModifyDate(LocalDateTime modifyDate) {
         this.modifyDate = modifyDate;
+=======
+    public float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(float discount) {
+        this.discount = discount;
+    }
+
+    public Date getLastModifyDate() {
+        return lastModifyDate;
+    }
+
+    public void setLastModifyDate(Date lastModifyDate) {
+        this.lastModifyDate = lastModifyDate;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
     }
 
     public String getName() {
@@ -139,6 +229,7 @@ public class Product {
         this.name = name;
     }
 
+<<<<<<< HEAD
     public double getBasePrice() {
         return basePrice;
     }
@@ -172,6 +263,16 @@ public class Product {
     }
 
 
+=======
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
     public Integer getQuantityToGetPromotion() {
         return quantityToGetPromotion;
     }
@@ -188,6 +289,7 @@ public class Product {
         this.status = status;
     }
 
+<<<<<<< HEAD
     public String getUnit() {
         return unit;
     }
@@ -234,5 +336,13 @@ public class Product {
 
     public void setUserProducts(List<UserProduct> userProducts) {
         this.userProducts = userProducts;
+=======
+    public OrderDetail getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(OrderDetail orderDetail) {
+        this.orderDetail = orderDetail;
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
     }
 }

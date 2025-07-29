@@ -27,6 +27,31 @@ public class JwtUtils {
     @Value("${wms-natrumax.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
+<<<<<<< HEAD
+=======
+    @Value("${wms-natrumax.app.jwtCookieName}")
+    private String jwtCookie;
+
+    public String getJwtFromCookies(HttpServletRequest request) {
+        Cookie cookie = WebUtils.getCookie(request, jwtCookie);
+        if (cookie != null) {
+            return cookie.getValue();
+        } else {
+            return null;
+        }
+    }
+
+    public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) {
+        String jwt = generateTokenFromUsername(userPrincipal.getUsername());
+        ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
+        return cookie;
+    }
+
+    public ResponseCookie getCleanJwtCookie() {
+        ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/api").build();
+        return cookie;
+    }
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parserBuilder().setSigningKey(key()).build()
@@ -54,13 +79,22 @@ public class JwtUtils {
         return false;
     }
 
+<<<<<<< HEAD
     public String generateJwtToken(UserDetailsImpl userPrincipal) {
         return Jwts.builder()
                 .setSubject(userPrincipal.getUsername())
+=======
+    public String generateTokenFromUsername(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(key(), SignatureAlgorithm.HS256)
                 .compact();
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> d7518d23dffcd1f22a4f928625d441902c8edfe6
 }
